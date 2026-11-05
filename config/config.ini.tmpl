@@ -76,6 +76,13 @@ eol_lf=true
 endpoint=https://terminal-api-live.adyen.com/sync
 api_key=api_key_from_adyen
 
+[caisse_ap_ip_driver]
+; One payment terminal per pywebdriver instance
+host=192.168.1.50
+port=8888
+; Maximum duration of a transaction, in seconds
+timeout=180
+
 [scale_driver]
 ; Customise this
 protocol_name=toledo

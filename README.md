@@ -57,6 +57,10 @@ Point of Sale with PyWebDriver as a Proxy.
     - Ingenico i2200 check reader and writer
     - Adyen terminals (compatible with Adyen Terminal API 3.0 -
       https://docs.adyen.com/point-of-sale/terminal-api-fundamentals)
+    - Payment terminals supporting the
+      [Caisse-AP](https://www.associationdupaiement.fr/protocoles/protocole-caisse/)
+      protocol over IP (Ingenico, Verifone...), with the Odoo module
+      `pos_payment_terminal`
   - **Customer Display**:
     - Bixolon BCD-1100
     - Bixolon BCD-1000
@@ -256,6 +260,26 @@ sslcert=cert.pem
 sslkey=privkey.pem
 
 ```
+
+#### Caisse-AP over IP payment terminal
+
+Enable only the `odoo8` and `caisse_ap_ip_driver` drivers and set the address of the
+payment terminal:
+
+```
+[application]
+drivers=odoo8,caisse_ap_ip_driver
+
+[caisse_ap_ip_driver]
+host=192.168.1.50
+port=8888
+timeout=180
+```
+
+One pywebdriver instance drives one payment terminal: use one instance (with its own
+config file and HTTP port) per terminal. Supported currencies are EUR and XPF. Refunds
+are not supported. To cancel a transaction in progress, press the red button on the
+payment terminal.
 
 ## <a name="development"></a>Development
 
